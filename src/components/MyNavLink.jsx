@@ -11,7 +11,7 @@ const MyNavLink = ({ href, children, className }) => {
             <Link href={href} className={`
                 relative px-4 py-2 rounded-xl font-medium transition-all duration-300
                 ${isActive
-                    ? 'bg-[#C8F04B] text-black shadow-md'
+                    ? 'bg-[#C8F04B] text-black font-bold shadow-md'
                     : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}>
                 {children}

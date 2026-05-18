@@ -82,7 +82,7 @@ const Footer = () => {
 
             <div className='flex flex-col sm:flex-row justify-between items-center gap-3'>
                 <p className='text-gray-300'>© 2025 SportNest. All rights reserved.</p>
-                <p className='text-gray-300'>Built with ❤️ for sports lovers in Bangladesh</p>
+                <p className='text-gray-300 text-center sm:text-left'>Built with ❤️ for sports lovers in Bangladesh</p>
             </div>
         </footer>
     );
