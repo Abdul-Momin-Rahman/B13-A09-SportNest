@@ -1,9 +1,14 @@
+import BannerSection from "@/components/BannerSection";
+import ChooseUsSection from "@/components/ChooseUsSection";
+import ExtraSection from "@/components/ExtraSection";
 
 
 export default function Home() {
   return (
     <div>
-      <p className="text-2xl font-bold">Hello Everyone</p>
+      <BannerSection></BannerSection>
+      <ChooseUsSection></ChooseUsSection>
+      <ExtraSection></ExtraSection>
     </div>
   );
 }

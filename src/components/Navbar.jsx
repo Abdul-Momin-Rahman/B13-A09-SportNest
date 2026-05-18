@@ -15,7 +15,7 @@ const Navbar = () => {
 
 
     return (
-        <div className='bg-[#0B0D0A] p-3'>
+        <div className='bg-[#0B0D0A] p-3 fixed top-0 left-0 w-full z-50 border-b border-[#C8F04B]/20'>
             <div className=' flex justify-between items-center  max-w-6xl mx-auto'>
                 <Logo />
 
@@ -23,7 +23,7 @@ const Navbar = () => {
                     <MyNavLink href={'/'}>Home</MyNavLink>
                     <MyNavLink href={'/all-facilities'}>All Facilities</MyNavLink>
 
-                    {/* {Hidden when logged out} */}
+                    {/* {Hidden when logged} */}
                     <div className='lg:flex justify-between items-center hidden gap-2'>
                         <MyNavLink href={'/my-bookings'}>My Bookings</MyNavLink>
                         <MyNavLink href={'/add-facility'}>Add Facility</MyNavLink>
@@ -135,6 +135,8 @@ const Navbar = () => {
 
                 <Button variant='primary' className={"bg-[#C8F04B] text-black font-extrabold rounded-lg"}>Login</Button>
             </div>
+
+            
         </div>
     );
 };
