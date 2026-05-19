@@ -1,5 +1,6 @@
 import { Barlow_Condensed, DM_Sans } from 'next/font/google'
 import "./globals.css";
+import { ToastContainer } from 'react-toastify';
 
 
 const barlowCondensed = Barlow_Condensed({
@@ -26,7 +27,7 @@ export default function RootLayout({ children }) {
       data-theme="light"
       className={`${barlowCondensed.variable} ${dmSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">{children}<ToastContainer /></body>
     </html>
   );
 }
