@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const FacilityCard = ({ facility }) => {
@@ -5,6 +6,16 @@ const FacilityCard = ({ facility }) => {
         <div
             className="group rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition duration-300 hover:-translate-y-2 hover:border-[#C8F04B]/30 hover:bg-[#C8F04B]/5"
         >
+
+            <div className="w-full h-40 mb-4 overflow-hidden rounded-2xl border border-white/10">
+                <Image
+                    width={200}
+                    height={200}
+                    src={facility.image_url}
+                    alt={facility.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                />
+            </div>
 
             <div className="flex items-center justify-between">
                 <span className="text-xs rounded-full border border-[#C8F04B]/30 bg-[#C8F04B]/10 px-3 py-1 text-[#C8F04B]">
