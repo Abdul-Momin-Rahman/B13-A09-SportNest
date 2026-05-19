@@ -72,6 +72,12 @@ const RegistrationPage = () => {
         }
     };
 
+    const handleGoogleSignin = async ()=> {
+        await authClient.signIn.social({
+            provider : 'google'
+        })
+    }
+
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#0B0D0A] text-white px-4">
@@ -150,7 +156,9 @@ const RegistrationPage = () => {
                 </form>
 
 
-                <button className="cursor-pointer mt-4 w-full border border-white/10 bg-white/5 py-3 rounded-xl hover:bg-white/10 transition">
+                <button
+                onClick={handleGoogleSignin}
+                className="cursor-pointer mt-4 w-full border border-white/10 bg-white/5 py-3 rounded-xl hover:bg-white/10 transition">
                     Continue with Google
                 </button>
 
