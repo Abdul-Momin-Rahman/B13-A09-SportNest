@@ -1,7 +1,12 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const FacilityCard = ({ facility }) => {
+
+    const id = facility._id;
+
+
     return (
         <div
             className="group rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition duration-300 hover:-translate-y-2 hover:border-[#C8F04B]/30 hover:bg-[#C8F04B]/5"
@@ -65,9 +70,11 @@ const FacilityCard = ({ facility }) => {
             </div>
 
 
-            <button className="mt-6 w-full rounded-full text-[#C8F04B] border border-[#C8F04B] py-2 text-sm font-semibold hover:text-black hover:bg-[#C8F04B] hover:scale-[1.02] transition cursor-pointer">
-                Book Now
-            </button>
+            <Link href={`/all-facilities/${id}`}>
+                <button className="mt-6 w-full rounded-full text-[#C8F04B] border border-[#C8F04B] py-2 text-sm font-semibold hover:text-black hover:bg-[#C8F04B] hover:scale-[1.02] transition cursor-pointer">
+                    Book Now
+                </button>
+            </Link>
         </div>
     );
 };
