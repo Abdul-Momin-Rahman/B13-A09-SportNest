@@ -2,7 +2,7 @@
 
 import { redirect, useParams } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
-import { Button, Modal } from "@heroui/react";
+import { Button, Modal, Toast } from "@heroui/react";
 import { useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
@@ -18,7 +18,7 @@ export default function BookingModal({ facility }) {
     const user = session?.user;
     // console.log(user)
 
-
+    const [loading, setLoading] = useState(false)
     const [hours, setHours] = useState("");
     const [date, setDate] = useState("");
     const [slot, setSlot] = useState("");
@@ -30,9 +30,10 @@ export default function BookingModal({ facility }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
 
         if (!date || !hours || !slot) {
-            alert("All fields are neccessary!")
+            Toast.info("All fields are neccessary!")
             return;
         }
 
@@ -53,14 +54,14 @@ export default function BookingModal({ facility }) {
             method: "POST",
             headers: {
                 "content-type": "application/json",
-                authorization : `Bearer ${tokenData?.token}`
+                authorization: `Bearer ${tokenData?.token}`
             },
             body: JSON.stringify(booking)
         });
 
         const data = await result.json();
         // console.log(data)
-
+        setLoading(false);
 
         if (data.acknowledged) {
             toast.success(`${name} booked!`, {
@@ -197,7 +198,7 @@ export default function BookingModal({ facility }) {
                                         type="submit"
                                         className={`w-full rounded-2xl ${isValid ? 'bg-[#C8F04B] transition hover:scale-[1.02] hover:shadow-lg hover:shadow-[#C8F04B]/20' : 'bg-[#C8F04B]/20'} py-3 text-base font-bold text-black  cursor-pointer`}
                                     >
-                                        Confirm Booking
+                                        {loading ? <span className="loading loading-spinner loading-xs"></span> : 'Confirm'}
                                     </button>
 
                                 </form>
