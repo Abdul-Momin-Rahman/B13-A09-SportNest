@@ -18,6 +18,8 @@ export default function FacilityForm() {
 
     // console.log(user.email)
 
+    const [loading, setLoading] = useState(false);
+
     const {
         register,
         handleSubmit,
@@ -35,6 +37,7 @@ export default function FacilityForm() {
     };
 
     const onSubmit = async (data) => {
+        setLoading(true);
 
         if (slots.every(s => !s.trim())) {
             toast.warning("At least one time slot is required");
@@ -67,6 +70,8 @@ export default function FacilityForm() {
         })
 
         const result = await res.json();
+
+        setLoading(false);
 
         if (result.acknowledged) {
             toast.success('Facility created successfully!', {
@@ -169,7 +174,7 @@ export default function FacilityForm() {
                     type="submit"
                     className="cursor-pointer w-full bg-[#C8F04B] text-black font-semibold p-3 rounded hover:bg-[#A8CC30]"
                 >
-                    Create Facility
+                    {loading ? <span className="loading loading-spinner loading-xs"></span> : 'Create Facility'}
                 </button>
             </form>
         </div>
