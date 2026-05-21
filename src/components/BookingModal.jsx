@@ -37,19 +37,23 @@ export default function BookingModal({ facility }) {
         }
 
         const booking = {
-            userId : user?.id,
+            userId: user?.id,
             facilityName: name,
             date,
             slot,
             totalPrice: price_per_hour * Number(hours),
             status: "pending",
-            email : user?.email
+            email: user?.email
         }
+
+        const { data: tokenData } = await authClient.token()
+        console.log(tokenData)
 
         const result = await fetch(`http://localhost:5000/all-facilities/${id}`, {
             method: "POST",
             headers: {
                 "content-type": "application/json",
+                authorization : `Bearer ${tokenData?.token}`
             },
             body: JSON.stringify(booking)
         });

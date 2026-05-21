@@ -24,7 +24,16 @@ export default async function BookingPage() {
     const userId = user?.id
     // console.log(userId)
 
-    const res = await fetch(`http://localhost:5000/my-bookings/${userId}`)
+
+    const { token } = await auth.api.getToken({
+        headers: await headers()
+    })
+
+    const res = await fetch(`http://localhost:5000/my-bookings/${userId}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
     const bookings = await res.json();
     // console.log(bookings)
 
@@ -78,10 +87,10 @@ export default async function BookingPage() {
                 </div>
 
 
-                {bookings.length > 0 ? 
+                {bookings.length > 0 ?
                     <div className="space-y-5">
                         {bookings.map((booking) => {
-                            
+
 
                             return (
                                 <div

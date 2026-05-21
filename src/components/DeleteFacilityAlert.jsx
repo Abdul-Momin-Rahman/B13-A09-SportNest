@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
@@ -11,10 +12,15 @@ export function DeletFacilityAlert({ facilityId }) {
     // console.log(facilityId)
 
     const handeleDeleteFacility = async () => {
+
+        const {data : tokenData } = await authClient.token()
+        // console.log(tokenData)
+
         const res = await fetch(`http://localhost:5000/my-facilities/${facilityId}`, {
             method: "DELETE",
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization : `Bearer ${tokenData?.token}`
             }
         })
 

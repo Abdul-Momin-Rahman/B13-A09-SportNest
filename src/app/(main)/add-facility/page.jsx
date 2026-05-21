@@ -53,10 +53,14 @@ export default function FacilityForm() {
 
         // console.log(facility);
 
+        const {data : tokenData } = await authClient.token()
+        // console.log(tokenData)
+
         const res = await fetch('http://localhost:5000/add-facility', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization : `Bearer ${tokenData?.token}`
             },
 
             body: JSON.stringify(facility)

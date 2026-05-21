@@ -9,11 +9,27 @@ import {
     Star,
 } from "lucide-react";
 import BookingModal from '@/components/BookingModal';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+
 
 const FacilityDetailsPage = async ({ params }) => {
     const { id } = await params;
 
-    const res = await fetch(`http://localhost:5000/all-facilities/${id}`)
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
+
+    // if (!token) {
+    //     console.log("No token found");
+    // }
+    // console.log(token)
+
+    const res = await fetch(`http://localhost:5000/all-facilities/${id}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
     const facility = await res.json();
 
     // console.log(facility)
@@ -26,8 +42,8 @@ const FacilityDetailsPage = async ({ params }) => {
             {/* HERO SECTION */}
             <div className="relative h-[500px] w-full overflow-hidden">
                 <Image
-                    src={facility.image_url}
-                    alt={facility.name}
+                    src={facility?.image_url}
+                    alt={facility?.name}
                     fill
                     priority
                     className="object-cover"
@@ -90,7 +106,7 @@ const FacilityDetailsPage = async ({ params }) => {
                 </div>
             </div>
 
-            
+
 
             {/* CONTENT */}
             <div className="max-w-7xl mx-auto px-6 py-10">

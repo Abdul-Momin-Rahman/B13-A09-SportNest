@@ -1,8 +1,8 @@
 'use client'
 
+import { authClient } from '@/lib/auth-client';
 import { Button, Modal } from '@heroui/react';
 import { redirect } from 'next/navigation';
-import { useState } from 'react';
 import { useForm } from "react-hook-form";
 
 const EditFacilityModal = ({ facility }) => {
@@ -15,10 +15,7 @@ const EditFacilityModal = ({ facility }) => {
         formState: { errors },
     } = useForm();
 
-    const [name, setName] = useState("");
-    const [location, setLocation] = useState("");
-    const [price, setPrice] = useState("");
-    const [capacity, setCapacity] = useState("");
+
 
 
 
@@ -29,10 +26,14 @@ const EditFacilityModal = ({ facility }) => {
         const updatedFacility = { ...formData }
 
         
+        const {data : tokenData } = await authClient.token()
+        // console.log(tokenData)
 
         const res = await fetch(`http://localhost:5000/my-facilities/${facilityId}`, {
             method: "PATCH",
-            headers: { "content-type": "application/json" },
+            headers: { "content-type": "application/json" ,
+                authorization : `Bearer ${tokenData?.token}`
+            },
             body: JSON.stringify(updatedFacility)
         });
 
@@ -45,7 +46,7 @@ const EditFacilityModal = ({ facility }) => {
         // console.log(updatedFacility)
     }
 
-    const isNotValid = !name || !location || !price || !capacity;
+    // const isNotValid = !name || !location || !price || !capacity;
 
 
 
@@ -81,51 +82,55 @@ const EditFacilityModal = ({ facility }) => {
                                         Edit Facility
                                     </h1>
 
-                                    <label>Facility Name</label>
+                                    
                                     <input
                                         {...register("name", { required: true })}
-                                        value={name} onChange={(e) => setName(e.target.value)}
-                                        placeholder={facility.name}
+                                       
+                                        placeholder="Facility Name"
+                                        defaultValue={facility?.name}
                                         className="w-full p-3 bg-[#1A1D18] text-[#E8EDE3] border border-[#1E2219] rounded"
                                     />
 
 
 
-                                    <label>Location</label>
+                                    
                                     <input
                                         {...register("location", { required: true })}
-                                        placeholder={facility.location}
-                                        value={location} onChange={(e) => setLocation(e.target.value)}
+                                        placeholder="Location"
+                                        defaultValue={facility?.location}
+                                        
                                         className="w-full p-3 bg-[#1A1D18] text-[#E8EDE3] border border-[#1E2219] rounded"
                                     />
 
                                     <div className="flex gap-3 justify-between">
 
                                         <div className='flex gap-2 items-center'>
-                                            <label>price/hr</label>
+                                            
                                             <input
                                                 {...register("price", { required: true })}
                                                 type="number"
-                                                value={price} onChange={(e) => setPrice(e.target.value)}
-                                                placeholder={facility.price_per_hour}
+                                                
+                                                placeholder="price/hr"
+                                                defaultValue={facility?.price_per_hour}
                                                 className="w-1/2 p-3 bg-[#1A1D18] text-[#E8EDE3] border border-[#1E2219] rounded"
                                             />
                                         </div>
 
                                         <div className='flex gap-2 items-center'>
-                                            <label>Capacity</label>
+                                            
                                             <input
                                                 {...register("capacity", { required: true })}
                                                 type="number"
-                                                value={capacity} onChange={(e) => setCapacity(e.target.value)}
-                                                placeholder={facility.capacity}
+                                                
+                                                placeholder="Capacity"
+                                                defaultValue={facility?.capacity}
                                                 className="w-1/2 p-3 bg-[#1A1D18] text-[#E8EDE3] border border-[#1E2219] rounded"
                                             />
                                         </div>
                                     </div>
 
                                     <Button
-                                        isDisabled={isNotValid}
+                                        // isDisabled={isNotValid}
                                         type="submit"
                                         className="cursor-pointer w-full bg-[#C8F04B] text-black font-semibold p-3 rounded hover:bg-[#A8CC30]"
                                         slot="close"
