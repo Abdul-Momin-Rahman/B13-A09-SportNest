@@ -2,14 +2,16 @@
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
-export function BookingCancelAlert({ bookingId }) {
+
+
+export function DeletFacilityAlert({ facilityId }) {
 
     const router = useRouter();
 
-    // console.log(bookingId)
+    // console.log(facilityId)
 
-    const handeleCancelBooking = async () => {
-        const res = await fetch(`http://localhost:5000/my-bookings/${bookingId}`, {
+    const handeleDeleteFacility = async () => {
+        const res = await fetch(`http://localhost:5000/my-facilities/${facilityId}`, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json'
@@ -17,11 +19,11 @@ export function BookingCancelAlert({ bookingId }) {
         })
 
         const data = await res.json();
-        console.log(data)
+        // console.log(data)
 
         if (data.deletedCount > 0) {
 
-            toast.info('Booking Cancelled', {
+            toast.info('Facility Deleted!', {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -39,8 +41,8 @@ export function BookingCancelAlert({ bookingId }) {
 
     return (
         <AlertDialog>
-            <Button variant="ghost" className="h-12 px-6 rounded-2xl border border-[#FF4D4D40] text-[#FF4D4D] hover:bg-[#FF4D4D] hover:text-white transition-all duration-300 font-semibold">
-                Cancel
+            <Button variant="ghost" className="h-12 px-6 py-2 rounded-xl border border-red-500/40 text-red-400 hover:bg-red-500/10 transition-all duration-300 font-semibold">
+                Delete
             </Button>
             <AlertDialog.Backdrop>
                 <AlertDialog.Container>
@@ -57,7 +59,7 @@ export function BookingCancelAlert({ bookingId }) {
 
                                 <div>
                                     <AlertDialog.Heading className="text-2xl font-black uppercase tracking-wide text-[#E8EDE3]">
-                                        Confirm Cancel Booking
+                                        Confirm Delete Facility
                                     </AlertDialog.Heading>
 
                                     <p className="mt-1 text-sm text-[#9BA694]">
@@ -77,12 +79,12 @@ export function BookingCancelAlert({ bookingId }) {
                             </Button>
 
                             <Button
-                                onClick={handeleCancelBooking}
+                                onClick={handeleDeleteFacility}
                                 slot="close"
                                 variant="danger"
                                 className="flex-1 rounded-2xl border border-[#FF4D4D40] bg-[#FF4D4D15] text-[#FF4D4D] hover:bg-[#FF4D4D] hover:text-white transition-all duration-300"
                             >
-                                Cancel Booking
+                                Delete Facility
                             </Button>
                         </AlertDialog.Footer>
                     </AlertDialog.Dialog>

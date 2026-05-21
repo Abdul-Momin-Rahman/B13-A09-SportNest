@@ -93,7 +93,7 @@ export default function BookingModal({ facility }) {
 
                         <Modal.Dialog className="max-w-2xl overflow-hidden border border-white/10 bg-[#0B0F19] shadow-2xl">
 
-                            <Modal.CloseTrigger className="text-white/60 hover:text-white" />
+                            <Modal.CloseTrigger className="text-white/60 bg-[#121410] hover:text-white" />
 
 
                             <Modal.Body className="bg-[#0B0F19] p-2">

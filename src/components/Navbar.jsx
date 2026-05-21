@@ -258,7 +258,7 @@ const Navbar = () => {
                                         </Avatar>
 
 
-                                        <div className="flex flex-col items-start leading-tight">
+                                        <div className="hidden sm:flex flex-col items-start leading-tight">
                                             <span className="text-white font-semibold text-sm">
                                                 {user.name
                                                     ?.split(" ")[1].toUpperCase()

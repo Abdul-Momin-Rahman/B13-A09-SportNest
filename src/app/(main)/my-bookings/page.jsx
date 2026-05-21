@@ -78,64 +78,65 @@ export default async function BookingPage() {
                 </div>
 
 
-                {bookings.length > 0 ? <div className="space-y-5">
-                    {bookings.map((booking) => {
-                        const status = { label: 'Pending' };
+                {bookings.length > 0 ? 
+                    <div className="space-y-5">
+                        {bookings.map((booking) => {
+                            
 
-                        return (
-                            <div
-                                key={booking._id}
-                                className="group bg-[#121410] border border-[#1E2219] hover:border-[#2A2E28] transition-all duration-300 rounded-[28px] p-5 md:p-7"
-                            >
-                                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                            return (
+                                <div
+                                    key={booking._id}
+                                    className="group bg-[#121410] border border-[#1E2219] hover:border-[#2A2E28] transition-all duration-300 rounded-[28px] p-5 md:p-7"
+                                >
+                                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
 
-                                    <div className="flex items-start gap-5">
+                                        <div className="flex items-start gap-5">
 
-                                        <div>
-                                            <h2 className="text-2xl font-black uppercase mb-3">
-                                                {booking.facilityName}
-                                            </h2>
+                                            <div>
+                                                <h2 className="text-2xl font-black uppercase mb-3">
+                                                    {booking.facilityName}
+                                                </h2>
 
-                                            <div className="flex flex-wrap items-center gap-4 text-sm text-[#9BA694]">
-                                                <div className="flex items-center gap-2">
-                                                    <CalendarDays size={15} />
-                                                    <span>{booking.date}</span>
+                                                <div className="flex flex-wrap items-center gap-4 text-sm text-[#9BA694]">
+                                                    <div className="flex items-center gap-2">
+                                                        <CalendarDays size={15} />
+                                                        <span>{booking.date}</span>
+                                                    </div>
+
+                                                    <div className="flex items-center gap-2">
+                                                        <Clock3 size={15} />
+                                                        <span>{booking.slot}</span>
+                                                    </div>
+
+
                                                 </div>
-
-                                                <div className="flex items-center gap-2">
-                                                    <Clock3 size={15} />
-                                                    <span>{booking.slot}</span>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Right */}
-                                    <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
-                                        <div className="text-left md:text-right">
-                                            <h3 className="text-4xl font-black text-[#C8F04B]">
-                                                ৳{booking.totalPrice}
-                                            </h3>
-
-                                            <div
-                                                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mt-3 border"
-                                            >
-
-                                                <span className="uppercase text-xs font-bold tracking-wide">
-                                                    {status.label}
-                                                </span>
                                             </div>
                                         </div>
 
-                                        <BookingCancelAlert bookingId={booking._id}></BookingCancelAlert>
+                                        {/* Right */}
+                                        <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+                                            <div className="text-left md:text-right">
+                                                <h3 className="text-4xl font-black text-[#C8F04B]">
+                                                    ৳{booking.totalPrice}
+                                                </h3>
+
+                                                <div
+                                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full mt-3 border"
+                                                >
+
+                                                    <span className="uppercase text-xs font-bold tracking-wide">
+                                                        {booking.status}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <BookingCancelAlert bookingId={booking._id}></BookingCancelAlert>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
-                </div>
+                            );
+                        })}
+                    </div>
                     :
                     <div className="flex flex-col items-center justify-center py-20 text-center rounded-3xl border border-white/10 bg-white/5">
 

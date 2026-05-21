@@ -35,6 +35,12 @@ export default function FacilityForm() {
     };
 
     const onSubmit = async (data) => {
+
+        if (slots.every(s => !s.trim())) {
+            toast.warning("At least one time slot is required");
+            return;
+
+        }
         const facility = {
             userId : user?.id,
             ...data,
@@ -43,10 +49,6 @@ export default function FacilityForm() {
         };
 
 
-        if (slots.every(s => !s.trim())) {
-            toast.warning("At least one time slot is required");
-            return;
-        }
 
 
         // console.log(facility);
@@ -74,7 +76,7 @@ export default function FacilityForm() {
                 theme: "dark",
                 transition: Bounce,
             });
-            router.push('/all-facilities')
+            router.push('/my-facilities')
         }
     };
 

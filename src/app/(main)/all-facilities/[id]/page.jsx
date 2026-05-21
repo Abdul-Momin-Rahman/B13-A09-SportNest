@@ -81,9 +81,7 @@ const FacilityDetailsPage = async ({ params }) => {
                                     </span>
                                 </div>
 
-                                {/* <button className="cursor-pointer mt-5 w-full bg-[#C8F04B] hover:bg-[#A8CC30] transition text-black font-semibold py-3 rounded-2xl">
-                                    Book Now
-                                </button> */}
+
                                 <BookingModal facility={facility}></BookingModal>
                             </div>
 
