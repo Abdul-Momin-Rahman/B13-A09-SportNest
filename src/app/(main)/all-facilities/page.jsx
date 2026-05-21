@@ -7,7 +7,7 @@ const AllFacilitiesPage = async () => {
     const facilities = await res.json();
 
     return (
-        <div className="relative overflow-hidden bg-[#0B0D0A] py-24 text-white">
+        <div className="relative overflow-hidden bg-[#0B0D0A] pb-24 text-white">
             <div className="relative mx-auto max-w-7xl px-6">
                 <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 

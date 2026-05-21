@@ -15,7 +15,8 @@ export default function BookingModal({ facility }) {
         data: session,
     } = authClient.useSession()
 
-    const email = session?.user?.email;
+    const user = session?.user;
+    // console.log(user)
 
 
     const [hours, setHours] = useState("");
@@ -36,12 +37,13 @@ export default function BookingModal({ facility }) {
         }
 
         const booking = {
+            userId : user?.id,
             facilityName: name,
             date,
             slot,
             totalPrice: price_per_hour * Number(hours),
             status: "pending",
-            email
+            email : user?.email
         }
 
         const result = await fetch(`http://localhost:5000/all-facilities/${id}`, {

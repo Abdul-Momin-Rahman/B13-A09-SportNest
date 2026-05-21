@@ -1,0 +1,94 @@
+"use client";
+import { AlertDialog, Button } from "@heroui/react";
+import { router } from "better-auth/api";
+import { useRouter } from "next/navigation";
+import { Bounce, toast } from "react-toastify";
+export function BookingCancelAlert({ bookingId }) {
+
+    const router = useRouter();
+
+    // console.log(bookingId)
+
+    const handeleCancelBooking = async () => {
+        const res = await fetch(`http://localhost:5000/my-bookings/${bookingId}`, {
+            method: "DELETE",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+
+        const data = await res.json();
+        console.log(data)
+
+        if (data.deletedCount > 0) {
+
+            toast.info('Booking Cancelled', {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
+            router.refresh();
+        }
+
+    }
+
+    return (
+        <AlertDialog>
+            <Button variant="ghost" className="h-12 px-6 rounded-2xl border border-[#FF4D4D40] text-[#FF4D4D] hover:bg-[#FF4D4D] hover:text-white transition-all duration-300 font-semibold">
+                Cancel
+            </Button>
+            <AlertDialog.Backdrop>
+                <AlertDialog.Container>
+                    <AlertDialog.Dialog
+                        className="sm:max-w-[400px] rounded-3xl border border-[#1E2219] bg-[#121410] text-[#E8EDE3] shadow-2xl shadow-black/40"
+                    >
+                        <AlertDialog.CloseTrigger />
+
+                        <AlertDialog.Header className="border-b border-[#1E2219] pb-5">
+                            <div className="flex items-center gap-4">
+                                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#FF4D4D40] bg-[#FF4D4D15]">
+                                    <AlertDialog.Icon status="danger" className="text-[#FF4D4D]" />
+                                </div>
+
+                                <div>
+                                    <AlertDialog.Heading className="text-2xl font-black uppercase tracking-wide text-[#E8EDE3]">
+                                        Confirm Cancel Booking
+                                    </AlertDialog.Heading>
+
+                                    <p className="mt-1 text-sm text-[#9BA694]">
+                                        This action cannot be undone.
+                                    </p>
+                                </div>
+                            </div>
+                        </AlertDialog.Header>
+
+                        <AlertDialog.Footer className="mt-6 flex gap-3">
+                            <Button
+                                slot="close"
+                                variant="tertiary"
+                                className="flex-1 rounded-2xl border border-[#2A2E28] bg-[#1A1D18] text-[#9BA694] hover:bg-[#2A2E28] hover:text-[#E8EDE3] transition-all duration-300"
+                            >
+                                Back
+                            </Button>
+
+                            <Button
+                                onClick={handeleCancelBooking}
+                                slot="close"
+                                variant="danger"
+                                className="flex-1 rounded-2xl border border-[#FF4D4D40] bg-[#FF4D4D15] text-[#FF4D4D] hover:bg-[#FF4D4D] hover:text-white transition-all duration-300"
+                            >
+                                Cancel Booking
+                            </Button>
+                        </AlertDialog.Footer>
+                    </AlertDialog.Dialog>
+                </AlertDialog.Container>
+            </AlertDialog.Backdrop>
+        </AlertDialog>
+    );
+}

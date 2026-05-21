@@ -36,6 +36,7 @@ export default function FacilityForm() {
 
     const onSubmit = async (data) => {
         const facility = {
+            userId : user?.id,
             ...data,
             slots,
             email: user.email
@@ -62,9 +63,9 @@ export default function FacilityForm() {
         const result = await res.json();
 
         if (result.acknowledged) {
-            toast.success('Facility has been added successfully!', {
+            toast.success('Facility created successfully!', {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: false,
                 pauseOnHover: true,
@@ -78,14 +79,14 @@ export default function FacilityForm() {
     };
 
     return (
-        <div className="min-h-screen bg-[#0B0D0A] flex items-center justify-center p-6">
+        <div className=" bg-[#0B0D0A] flex items-center justify-center p-12">
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="w-full max-w-2xl bg-[#121410] border border-[#1E2219] p-6 rounded-xl space-y-4"
             >
-                <h2 className="text-[#E8EDE3] text-3xl font-semibold">
+                <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tight text-[#E8EDE3]">
                     Add Facility
-                </h2>
+                </h1>
 
                 <input
                     {...register("name", { required: true })}
