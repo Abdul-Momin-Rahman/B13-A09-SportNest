@@ -49,7 +49,7 @@ export default function BookingModal({ facility }) {
         const { data: tokenData } = await authClient.token()
         console.log(tokenData)
 
-        const result = await fetch(`http://localhost:5000/all-facilities/${id}`, {
+        const result = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-facilities/${id}`, {
             method: "POST",
             headers: {
                 "content-type": "application/json",

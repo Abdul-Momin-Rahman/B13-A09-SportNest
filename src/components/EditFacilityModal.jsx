@@ -29,7 +29,7 @@ const EditFacilityModal = ({ facility }) => {
         const {data : tokenData } = await authClient.token()
         // console.log(tokenData)
 
-        const res = await fetch(`http://localhost:5000/my-facilities/${facilityId}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-facilities/${facilityId}`, {
             method: "PATCH",
             headers: { "content-type": "application/json" ,
                 authorization : `Bearer ${tokenData?.token}`

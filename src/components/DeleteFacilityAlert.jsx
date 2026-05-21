@@ -16,7 +16,7 @@ export function DeletFacilityAlert({ facilityId }) {
         const {data : tokenData } = await authClient.token()
         // console.log(tokenData)
 
-        const res = await fetch(`http://localhost:5000/my-facilities/${facilityId}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-facilities/${facilityId}`, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json',
