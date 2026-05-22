@@ -32,7 +32,7 @@ const Navbar = () => {
     return (
         <div className='bg-[#0B0D0A] p-3 sticky top-0 left-0 w-full z-50 border-b border-[#C8F04B]/20'>
             <div className=' flex justify-between items-center  max-w-6xl mx-auto'>
-                <Logo />
+                <Link href={'/'}><Logo /></Link>
 
                 <div className='lg:flex justify-between items-center hidden gap-2'>
                     <MyNavLink href={'/'}>Home</MyNavLink>
