@@ -69,12 +69,12 @@ const LoginPage = () => {
 
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#0B0D0A] text-white px-4">
+        <div className="relative min-h-screen flex items-center justify-center bg-[#0B0D0A] text-white px-4 overflow-hidden">
 
 
-            <div className="absolute h-[400px] w-[400px] bg-[#C8F04B]/10 blur-[120px] rounded-full" />
+            <div className="absolute top-1/2 left-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 bg-[#C8F04B]/10 blur-[120px] rounded-full pointer-events-none" />
 
-            <div className="relative w-full max-w-md rounded-3xl border border-white/10 bg-white/5 backdrop-blur p-8">
+            <div className="relative w-full max-w-md rounded-3xl border border-white/10 bg-white/5 backdrop-blur p-8 z-10">
 
 
                 <h1 className="text-3xl font-bold text-center">
