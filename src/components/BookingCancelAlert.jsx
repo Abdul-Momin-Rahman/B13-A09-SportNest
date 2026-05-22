@@ -2,29 +2,36 @@
 import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Bounce, toast } from "react-toastify";
+
+
 export function BookingCancelAlert({ bookingId }) {
 
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
     // console.log(bookingId)
-    
+
 
     const handeleCancelBooking = async () => {
+        setLoading(true)
 
-        const {data : tokenData } = await authClient.token()
+        const { data: tokenData } = await authClient.token()
         // console.log(tokenData)
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-bookings/${bookingId}`, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json',
-                authorization : `Bearer ${tokenData?.token}`
+                authorization: `Bearer ${tokenData?.token}`
             }
         })
 
         const data = await res.json();
         console.log(data)
+
+        setLoading(false)
 
         if (data.deletedCount > 0) {
 
@@ -45,7 +52,27 @@ export function BookingCancelAlert({ bookingId }) {
     }
 
     return (
-        <AlertDialog>
+        <AlertDialog className="relative sm:max-w-[400px] rounded-3xl border border-[#1E2219] bg-[#121410] text-[#E8EDE3] shadow-2xl shadow-black/40">
+
+
+            {loading && (
+                <div className="absolute inset-0 z-50 flex items-center justify-center rounded-3xl bg-[#121410]/80 backdrop-blur-sm">
+                    <div className="flex flex-col items-center gap-4">
+                        <div className="h-14 w-14 animate-spin rounded-full border-4 border-[#2A2E28] border-t-[#C8F04B]" />
+
+                        <div className="text-center">
+                            <p className="text-sm font-semibold tracking-wide text-[#E8EDE3]">
+                                Cancelling Booking...
+                            </p>
+                            <p className="mt-1 text-xs text-[#9BA694]">
+                                Please wait a moment
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+
             <Button variant="ghost" className="h-12 px-6 rounded-2xl border border-[#FF4D4D40] text-[#FF4D4D] hover:bg-[#FF4D4D] hover:text-white transition-all duration-300 font-semibold">
                 Cancel
             </Button>
